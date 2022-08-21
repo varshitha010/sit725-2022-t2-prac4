@@ -3,7 +3,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
 const cors = require("cors");
-const { MongoClient } = require("mongodb");
+const { MongoClient, ServerApiVersion } = require("mongodb");
 require("dotenv").config();
 
 app.use(express.static(__dirname + "/public"));
@@ -93,17 +93,18 @@ app.get("/api/projects", (req, res) => {
 app.post("/api/projects", (req, res) => {
   client.connect((err, db) => {
     projectCollection = client.db().collection(collectionName);
-    projectCollection.insertMany(data, function (err, res) {
+    const data  = JSON.parse(JSON.stringify(req.body))
+    projectCollection.insertOne(data, function (err, result) {
       if (err) {
-        res.json({ statusCode: 404, data: err, message: "fail" });
+        res.status(404).json({ message: "fail" });
       }
-      res.json({ statusCode: 200, data: res.insertedCount, message: "success" });
+      res.status(200).json({ message: "success" });
     });
   });
 });
 
 // DB connection
-const client = new MongoClient(uri);
+const client = new MongoClient(uri,  { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 
 const createCollection = (collectionName) => {
   client.connect((err, db) => {
@@ -112,7 +113,7 @@ const createCollection = (collectionName) => {
       console.log("Filed to connect", err);
     }
     console.log("MongoDB connected");
-     // insertData(cardList);
+    // insertData(cardList);
   });
 };
 

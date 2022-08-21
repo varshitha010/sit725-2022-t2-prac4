@@ -47,9 +47,37 @@
           <div class="col s12 center-align">
             <p class="flow-text">
               Top 8 Environmental Sustainability Issues We Need to Address
-             </div>
+          </div>
+          <div class="col s12 center-align">
+            <a class="waves-effect waves-light btn click-me-button modal-trigger" id="clickMeButton" data-target="modal1"><i class="material-icons left">auto_fix_high</i>Click Here to Add more issues</a>
+          </div>
         </div>
         <div class="row" id="card-section">
+        </div>
+      </div>
+      <div id="modal1" class="modal modal-fixed-footer">
+        <div class="row modal-content">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="title" type="text" class="validate" required="" aria-required="true">
+                <label for="title">Title</label>
+                <span class="helper-text" data-error="Please enter the title" data-success="right"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="description" type="text" class="validate" required="" aria-required="true">
+                <label for="description">Description</label>
+                <span class="helper-text" data-error="Please enter the description" data-success="right"></span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12 center-align">
+                <a class="waves-effect waves-light btn" id="formSubmit">submit</a>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </main>
